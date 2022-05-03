@@ -30,17 +30,19 @@
   }
 </script>
 
-<div class="container">
-  <div class="form">
-    <label for="board-sn">Board Shortname</label>
-    <input bind:value={req.board_sn} id="board-sn" type="text" />
-    <label for="thread-id">Thread ID</label>
-    <input bind:value={req.thread_id} id="thread-id" type="text" />
-    <label for="room-name">Room Name</label>
-    <input bind:value={req.room_name} id="room-name" type="text" />
-    <label for="user-name">User Name</label>
-    <input bind:value={req.username} id="user-name" type="text" />
-    <br />
-    <button on:click={createRoom}>Start Room</button>
+<div class="center">
+  <div class="container">
+    <div class="form">
+      <label for="board-sn">Board Shortname</label>
+      <input bind:value={req.board_sn} id="board-sn" type="text" />
+      <label for="thread-id">Thread ID</label>
+      <input bind:value={req.thread_id} id="thread-id" type="text" />
+      <label for="room-name">Room Name</label>
+      <input bind:value={req.room_name} id="room-name" type="text" />
+      <label for="user-name">User Name</label>
+      <input bind:value={req.username} id="user-name" type="text" />
+      <br />
+      <button on:click={createRoom}>Start Room</button>
+    </div>
   </div>
 </div>

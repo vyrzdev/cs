@@ -4,7 +4,9 @@
 
 <nav>
     <div class="icon">
-        <h1>CS</h1>
+        <Link to="/" class="icon">
+        <h1 class="icon">CS</h1>
+        </Link>
     </div>
     <div class="links">
         <Link to="create">Create Room</Link>
@@ -24,5 +26,10 @@
     .links {
         margin-top: auto;
         margin-bottom: auto;
+    }
+    
+    .icon {
+        text-decoration: none;
+        color: black;
     }
 </style>

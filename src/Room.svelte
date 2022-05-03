@@ -5,11 +5,28 @@
 
   export let name;
   let vid;
+  let src;
   let justSeeked = false;
   let users = [];
 
+  function load(node, src) {
+    if (src) {
+      node.src = src;
+      node.load();
+    }
+    return {
+      update(src) {
+        if (src) {
+          node.src = src;
+          node.load();
+        }
+      },
+    };
+  }
   onMount(() => {
     vid = document.getElementById("vid");
+    let skipb = document.getElementById("skipb");
+    let skipf = document.getElementById("skipf");
     let un = "";
     username.subscribe((val) => (un = val));
     var ws = new WebSocket(`ws://localhost:3000/room/${name}?username=${un}`);
@@ -43,7 +60,8 @@
           vid.currentTime = jsonData.data;
           break;
         case "vid":
-          let src = jsonData.data;
+          src = `https://small-bonus-7f1f.manfromth3m0on.workers.dev/?${jsonData.data}`;
+          /*
           console.log(src);
 
           if (document.contains(document.getElementById("vid-src"))) {
@@ -57,6 +75,7 @@
           );
           source.setAttribute("id", "vid-src");
           vid.appendChild(source);
+          */
           break;
       }
     };
@@ -81,6 +100,14 @@
         justSeeked = false;
       }
     });
+
+    skipb.addEventListener("click", () => {
+      ws.send(JSON.stringify({ type: "skipb" }));
+    });
+
+    skipf.addEventListener("click", () => {
+      ws.send(JSON.stringify({ type: "skipf" }));
+    });
   });
 
   onDestroy(() => {
@@ -98,7 +125,7 @@
   <div class="panes">
     <div class="vidpanel">
       <!-- svelte-ignore a11y-media-has-caption -->
-      <video id="vid" controls />
+      <video id="vid" use:load="{src}" controls autoplay />
     </div>
     <div class="controls">
       <h1>controls</h1>
@@ -110,9 +137,8 @@
         </ul>
       </div>
       <div class="buttons">
-        <button on:click={() => seek("back")}> &#60; </button>
-        <button on:click={() => seek("pause")}> || </button>
-        <button on:click={() => seek("forward")}> &#62; </button>
+        <button id="skipb"> &#60; </button>
+        <button id="skipf"> &#62; </button>
       </div>
     </div>
   </div>
