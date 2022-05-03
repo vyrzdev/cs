@@ -13,7 +13,7 @@
   function createRoom() {
     username.set(req.username);
     console.log(req);
-    fetch("http://localhost:3000/create-room", {
+    fetch("http://./api/create-room", {
       method: "POST",
       body: JSON.stringify(req),
     })
